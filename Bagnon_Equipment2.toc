@@ -1,0 +1,10 @@
+## Interface: 80000
+## Title: Bagnon Equipment 2
+## Author: Alexis "Sadzeih" Guerville
+## Notes: Marks each item in the Bagnon inventory with equipment set icons (only supports WoW equipment sets). Forked from Bagnon Equipment
+## RequiredDeps: Bagnon
+## Version: 1.0
+## X-License: The MIT License (MIT)
+## X-Category: Inventory
+
+main.lua
