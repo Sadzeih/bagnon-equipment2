@@ -9,8 +9,8 @@ local ItemSearch = LibStub('LibItemSearch-1.2')
 local function CreateIcons(slot)
   local equipmentSetIcons = {}
   
-  for i = 1, C_EquipmentSet.GetNumEquipmentSets() do
-    local name, iconTexture = C_EquipmentSet.GetEquipmentSetInfo(i - 1)
+  for i = 0, C_EquipmentSet.GetNumEquipmentSets() - 1 do
+    local name, iconTexture = C_EquipmentSet.GetEquipmentSetInfo(i)
     local icon = slot:CreateTexture(nil, 'OVERLAY')
     icon:SetTexture(iconTexture)
     icon:SetSize(15, 15)
@@ -23,9 +23,10 @@ end
 
 -- Called when the inventory is loaded for each item
 function ItemSlot:UpdateBorder()
+  UpdateBorder(self)
   local item = self:GetItem()
   local equipmentSetIcons = self.EquipmentSetIcons or CreateIcons(self)
-  self:HideBorder()
+  -- self:HideBorder()
   
   -- Hide all equipment set icons first
   for curName, _ in pairs(equipmentSetIcons) do
@@ -44,7 +45,7 @@ function ItemSlot:UpdateBorder()
         -- Set the draw layer (so the icons render over each other properly),
         -- the position, and display the icon
         equipmentSetIcons[equipmentSetName]:SetDrawLayer('OVERLAY', (7 - iteration))
-        equipmentSetIcons[equipmentSetName]:SetPoint('BOTTOMLEFT',
+        equipmentSetIcons[equipmentSetName]:SetPoint('BOTTOMLEFT',  
           (iteration * (equipmentSetIcons[equipmentSetName]:GetWidth() / 2)),
           0)
         equipmentSetIcons[equipmentSetName]:SetShown(true)
@@ -62,7 +63,6 @@ function ItemSlot:UpdateBorder()
     end
   end
  
-  UpdateBorder(self)
 end
 
 -- Gets the equipment set names for a single item
